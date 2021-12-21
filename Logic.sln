@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic.Simulator", "LogicDemo\Logic.Simulator.csproj", "{C59D2345-8768-430D-8874-E2E69AA47520}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic.Simulator", "Logic.Simulator\Logic.Simulator.csproj", "{C59D2345-8768-430D-8874-E2E69AA47520}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic.Simulator.Tests", "LogicModelTests\Logic.Simulator.Tests.csproj", "{33EED74C-6594-4DD0-BA36-A062CA357855}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic.Simulator.Tests", "Logic.Simulator.Tests\Logic.Simulator.Tests.csproj", "{33EED74C-6594-4DD0-BA36-A062CA357855}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{4B6F08A2-9152-435B-ADAC-8E1BE224AD2A}"
 EndProject

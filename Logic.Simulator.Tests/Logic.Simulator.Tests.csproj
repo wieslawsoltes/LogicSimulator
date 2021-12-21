@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LogicDemo\Logic.Simulator.csproj" />
+    <ProjectReference Include="..\Logic.Simulator\Logic.Simulator.csproj" />
   </ItemGroup>
 
 </Project>
