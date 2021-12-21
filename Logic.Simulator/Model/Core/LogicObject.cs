@@ -5,13 +5,9 @@ namespace Logic.Model.Core
 {
     public abstract class LogicObject : INotifyPropertyChanged, ILogicObject, IId, ILocation
     {
-        public virtual void Notify(string propertyName)
+        public void Notify(string propertyName)
         {
-            var handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
