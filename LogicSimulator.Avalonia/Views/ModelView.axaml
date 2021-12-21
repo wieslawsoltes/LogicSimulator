@@ -2,17 +2,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:diagrams="clr-namespace:LogicSimulator.Core.Diagrams;assembly=LogicSimulator.Core"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="LogicSimulator.Views.ModelView">
+             x:Class="LogicSimulator.Views.ModelView"
+             x:DataType="diagrams:DigitalLogicDiagram" x:CompileBindings="True">
   <UserControl.Resources>
     <selectors:LogicValueDataTemplateSelector x:Key="LogicValueDataTemplateSelector"/>
   </UserControl.Resources>
-  <Grid>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto"/>
-      <RowDefinition Height="Auto"/>
-      <RowDefinition Height="*"/>
-    </Grid.RowDefinitions>
+  <Grid RowDefinitions="Auto,Auto,*">
     <TextBlock Text="Elements"
                Grid.Column="0" Grid.Row="0" 
                Margin="0" Padding="2" 
