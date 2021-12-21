@@ -1,0 +1,38 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:LogicSimulator.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="LogicSimulator.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="LogicSimulator.Avalonia">
+
+  <Design.DataContext>
+    <vm:MainWindowViewModel />
+  </Design.DataContext>
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <Menu Grid.Row="0">
+      <MenuItem Header="_File">
+        <MenuItem x:Name="menuItemFileOpenDiagram" Header="_Open diagram..." Click="menuItemFileOpenDiagram_Click"/>
+        <MenuItem x:Name="menuItemFileSaveDiagram" Header="_Save diagram..." Click="menuItemFileSaveDiagram_Click"/>
+        <Separator/>
+        <MenuItem x:Name="menuItemFileExit" Header="Ex_it" Click="menuItemFileExit_Click"/>
+      </MenuItem>
+    </Menu>
+    <TabControl Grid.Row="1">
+      <TabItem Header="Diagram">
+        <local:DiagramView/>
+      </TabItem>
+      <TabItem Header="Model">
+        <local:ModelView/>
+      </TabItem>
+    </TabControl>
+  </Grid>
+  
+</Window>
