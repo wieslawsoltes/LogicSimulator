@@ -1,6 +1,6 @@
 ﻿namespace Logic.Model.Core
 {
-    public class DigitalSignal : LogicObject, IDigitalSignal
+    public class DigitalSignal : LogicObject
     {
         public DigitalSignal() { }
 

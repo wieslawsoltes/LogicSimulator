@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace Logic.Model.Diagrams
 {
-    public class DigitalLogicDiagram : DigitalLogic, IDigitalLogicDiagram
+    public class DigitalLogicDiagram : DigitalLogic
     {
         public IDictionary<Guid, IDisposable> Disposables = new Dictionary<Guid, IDisposable>();
 

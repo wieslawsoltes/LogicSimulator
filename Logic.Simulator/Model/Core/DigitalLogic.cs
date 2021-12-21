@@ -2,7 +2,7 @@
 
 namespace Logic.Model.Core
 {
-    public abstract class DigitalLogic : LogicObject, IDigitalLogic
+    public abstract class DigitalLogic : LogicObject
     {
         private ObservableCollection<DigitalSignal> inputs = new ObservableCollection<DigitalSignal>();
         private ObservableCollection<DigitalSignal> outputs = new ObservableCollection<DigitalSignal>();

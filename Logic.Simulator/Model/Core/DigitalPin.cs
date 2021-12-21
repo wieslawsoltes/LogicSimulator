@@ -1,6 +1,6 @@
 ﻿namespace Logic.Model.Core
 {
-    public class DigitalPin : LogicObject, IDigitalPin
+    public class DigitalPin : LogicObject
     {
         private DigitalSignal signal;
 

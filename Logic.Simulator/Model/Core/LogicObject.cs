@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace Logic.Model.Core
 {
-    public abstract class LogicObject : INotifyPropertyChanged, ILogicObject, IId, ILocation
+    public abstract class LogicObject : INotifyPropertyChanged
     {
         public void Notify(string propertyName)
         {
