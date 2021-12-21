@@ -1,9 +1,7 @@
 ﻿using System.Windows;
 
-namespace LogicSimulator
-{
+namespace LogicSimulator;
 
-    public partial class App : Application
-    {
-    } 
+public partial class App : Application
+{
 }

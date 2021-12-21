@@ -1,12 +1,11 @@
 ﻿using System.Windows.Controls;
 
-namespace LogicSimulator
+namespace LogicSimulator;
+
+public partial class ModelView : UserControl
 {
-    public partial class ModelView : UserControl
+    public ModelView()
     {
-        public ModelView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }
