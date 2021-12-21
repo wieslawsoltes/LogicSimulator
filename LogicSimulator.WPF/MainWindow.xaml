@@ -1,31 +1,32 @@
 ﻿<Window x:Class="LogicSimulator.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:logicSimulator="clr-namespace:LogicSimulator"
+        xmlns:views="clr-namespace:LogicSimulator"
         Title="LogicSimulator.Avalonia.WPF"
         Height="700" Width="800"
         WindowStartupLocation="CenterScreen" WindowState="Normal"
         UseLayoutRounding="True" TextOptions.TextFormattingMode="Display" SnapsToDevicePixels="True">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Menu Grid.Row="0">
-            <MenuItem Header="_File">
-                <MenuItem x:Name="menuItemFileOpenDiagram" Header="_Open diagram..." Click="menuItemFileOpenDiagram_Click"/>
-                <MenuItem x:Name="menuItemFileSaveDiagram" Header="_Save diagram..." Click="menuItemFileSaveDiagram_Click"/>
-                <Separator/>
-                <MenuItem x:Name="menuItemFileExit" Header="Ex_it" Click="menuItemFileExit_Click"/>
-            </MenuItem>
-        </Menu>
-        <TabControl Grid.Row="1">
-            <TabItem Header="Diagram">
-                <logicSimulator:DiagramView/>
-            </TabItem>
-            <TabItem Header="Model">
-                <logicSimulator:ModelView/>
-            </TabItem>
-        </TabControl>
-    </Grid>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <Menu Grid.Row="0">
+      <MenuItem Header="_File">
+        <MenuItem Header="_Open..." Click="menuItemFileOpenDiagram_Click" />
+        <Separator />
+        <MenuItem Header="_Save..." Click="menuItemFileSaveDiagram_Click" />
+        <Separator />
+        <MenuItem Header="Ex_it" Click="menuItemFileExit_Click" />
+      </MenuItem>
+    </Menu>
+    <TabControl Grid.Row="1">
+      <TabItem Header="Diagram">
+        <views:DiagramView />
+      </TabItem>
+      <TabItem Header="Model">
+        <views:ModelView />
+      </TabItem>
+    </TabControl>
+  </Grid>
 </Window>
