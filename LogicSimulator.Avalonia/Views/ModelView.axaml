@@ -3,23 +3,24 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:diagrams="clr-namespace:LogicSimulator.Core.Diagrams;assembly=LogicSimulator.Core"
+             xmlns:selectors="clr-namespace:LogicSimulator.Selectors"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="LogicSimulator.Views.ModelView"
              x:DataType="diagrams:DigitalLogicDiagram" x:CompileBindings="True">
-  <UserControl.Resources>
-    <selectors:LogicValueDataTemplateSelector x:Key="LogicValueDataTemplateSelector"/>
-  </UserControl.Resources>
   <Grid RowDefinitions="Auto,Auto,*">
     <TextBlock Text="Elements"
                Grid.Column="0" Grid.Row="0" 
                Margin="0" Padding="2" 
                Background="LightGreen" 
                TextAlignment="Center" FontWeight="DemiBold"/>
-    <ListBox Items="{Binding Path=Elements}" 
-             ItemTemplateSelector="{StaticResource ResourceKey=LogicValueDataTemplateSelector}" 
+    <ListBox Items="{Binding Elements}" 
              Grid.Column="0" Grid.Row="2" 
              HorizontalAlignment="Stretch" 
-             BorderThickness="0"/>
+             BorderThickness="0">
+      <ListBox.DataTemplates>
+        <selectors:LogicValueDataTemplateSelector />
+      </ListBox.DataTemplates>
+    </ListBox>
   </Grid>  
 </UserControl>
 

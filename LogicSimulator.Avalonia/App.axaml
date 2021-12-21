@@ -1,19 +1,28 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:LogicSimulator"
+             xmlns:converters="clr-namespace:LogicSimulator"
+             xmlns:core="clr-namespace:LogicSimulator.Core.Core;assembly=LogicSimulator.Core"
+             xmlns:gates="clr-namespace:LogicSimulator.Core.Gates;assembly=LogicSimulator.Core"
+             xmlns:timers="clr-namespace:LogicSimulator.Core.Timers;assembly=LogicSimulator.Core"
              x:Class="LogicSimulator.App">
-  <Application.DataTemplates>
-    <local:ViewLocator />
-  </Application.DataTemplates>
-  <Application.Styles>
-    <FluentTheme Mode="Light" />
-  </Application.Styles>
-  
-  <Application.Resources>
 
+  <!-- TODO: -->
+  <!--<Application.DataTemplates>
+    <local:ViewLocator />
+  </Application.DataTemplates>-->
+
+  <Application.Styles>
+
+    <FluentTheme Mode="Light" />
+
+    <Style Selector="ListBoxItem">
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    </Style>
+    
     <!-- Diagram -->
 
-    <Style x:Key="StateDigitalLogicGridStyleKey" Selector="Grid">
+    <Style Selector="Grid.StateDigitalLogicGridStyleKey">
       <Setter Property="Background" Value="Black" />
       <!--
           <Style.Triggers>
@@ -27,7 +36,7 @@
           -->
     </Style>
 
-    <Style x:Key="StateDigitalSignalGridStyleKey" Selector="Grid">
+    <Style Selector="Grid.StateDigitalSignalGridStyleKey">
       <Setter Property="Background" Value="Black" />
       <!--
           <Style.Triggers>
@@ -41,26 +50,24 @@
           -->
     </Style>
 
-    <Style x:Key="StateDigitalSignalLineStyleKey" Selector="Line">
+    <Style Selector="Line.StateDigitalSignalLineStyleKey">
       <Setter Property="Stroke" Value="Red" />
       <Setter Property="StrokeThickness" Value="2.0" />
-      <Setter Property="StrokeStartLineCap" Value="Round" />
-      <Setter Property="StrokeEndLineCap" Value="Round" />
-      <Style.Triggers>
-        <DataTrigger Binding="{Binding Path=Signal.State}" Value="False">
-          <Setter Property="Stroke" Value="Yellow" />
-        </DataTrigger>
-        <DataTrigger Binding="{Binding Path=Signal.State}" Value="True">
-          <Setter Property="Stroke" Value="DeepPink" />
-        </DataTrigger>
-      </Style.Triggers>
+      <Setter Property="StrokeLineCap" Value="Round" />
     </Style>
 
-    <Style x:Key="DigitalLogicLineStyleKey" Selector="Line">
+    <Style Selector="Line.IsFalse">
+      <Setter Property="Stroke" Value="Yellow" />
+    </Style>
+
+    <Style Selector="Line.IsTrue">
+      <Setter Property="Stroke" Value="DeepPink" />
+    </Style>
+
+    <Style Selector="Line.DigitalLogicLineStyleKey">
       <Setter Property="Stroke" Value="Yellow" />
       <Setter Property="StrokeThickness" Value="2.0" />
-      <Setter Property="StrokeStartLineCap" Value="Round" />
-      <Setter Property="StrokeEndLineCap" Value="Round" />
+      <Setter Property="StrokeLineCap" Value="Round" />
       <!--
           <Style.Triggers>
               <DataTrigger Binding="{Binding Path=Outputs[0].State}" Value="False">
@@ -73,22 +80,7 @@
           -->
     </Style>
 
-    <Style x:Key="DigitalLogicRectangleStyleKey" Selector="Rectangle">
-      <Setter Property="Stroke" Value="Yellow" />
-      <Setter Property="StrokeThickness" Value="2.0" />
-      <!--
-          <Style.Triggers>
-              <DataTrigger Binding="{Binding Path=Outputs[0].State}" Value="False">
-                  <Setter Property="Stroke" Value="Yellow"/>
-              </DataTrigger>
-              <DataTrigger Binding="{Binding Path=Outputs[0].State}" Value="True">
-                  <Setter Property="Stroke" Value="DeepPink"/>
-              </DataTrigger>
-          </Style.Triggers>
-          -->
-    </Style>
-
-    <Style x:Key="DigitalLogicEllipseStyleKey" Selector="Ellipse">
+    <Style Selector="Rectangle.DigitalLogicRectangleStyleKey">
       <Setter Property="Stroke" Value="Yellow" />
       <Setter Property="StrokeThickness" Value="2.0" />
       <!--
@@ -103,20 +95,35 @@
           -->
     </Style>
 
-    <Style x:Key="DigitalSignalRectangleStyleKey" Selector="Rectangle">
+    <Style Selector="Ellipse.DigitalLogicEllipseStyleKey">
+      <Setter Property="Stroke" Value="Yellow" />
+      <Setter Property="StrokeThickness" Value="2.0" />
+      <!--
+          <Style.Triggers>
+              <DataTrigger Binding="{Binding Path=Outputs[0].State}" Value="False">
+                  <Setter Property="Stroke" Value="Yellow"/>
+              </DataTrigger>
+              <DataTrigger Binding="{Binding Path=Outputs[0].State}" Value="True">
+                  <Setter Property="Stroke" Value="DeepPink"/>
+              </DataTrigger>
+          </Style.Triggers>
+          -->
+    </Style>
+
+    <Style Selector="Rectangle.DigitalSignalRectangleStyleKey">
       <Setter Property="Stroke" Value="Red" />
       <Setter Property="StrokeThickness" Value="2.0" />
-      <Style.Triggers>
-        <DataTrigger Binding="{Binding Path=State}" Value="False">
-          <Setter Property="Stroke" Value="Yellow" />
-        </DataTrigger>
-        <DataTrigger Binding="{Binding Path=State}" Value="True">
-          <Setter Property="Stroke" Value="DeepPink" />
-        </DataTrigger>
-      </Style.Triggers>
     </Style>
 
-    <Style x:Key="DigitalLogicTextBlockStyleKey" Selector="TextBlock">
+    <Style Selector="Rectangle.IsFalse">
+      <Setter Property="Stroke" Value="Yellow" />
+    </Style>
+
+    <Style Selector="Rectangle.IsTrue">
+      <Setter Property="Stroke" Value="DeepPink" />
+    </Style>
+
+    <Style Selector="TextBlock.DigitalLogicTextBlockStyleKey">
       <Setter Property="FontFamily" Value="Arial" />
       <Setter Property="FontSize" Value="12" />
       <Setter Property="FontWeight" Value="DemiBold" />
@@ -133,7 +140,7 @@
           -->
     </Style>
 
-    <Style x:Key="DigitalLogicSmallTextBlockStyleKey" Selector="TextBlock">
+    <Style Selector="TextBlock.DigitalLogicSmallTextBlockStyleKey">
       <Setter Property="FontFamily" Value="Arial" />
       <Setter Property="FontSize" Value="10" />
       <Setter Property="FontWeight" Value="DemiBold" />
@@ -150,22 +157,22 @@
           -->
     </Style>
 
-    <Style x:Key="DigitalSignalTextBlockStyleKey" Selector="TextBlock">
+    <Style Selector="TextBlock.DigitalSignalTextBlockStyleKey">
       <Setter Property="FontFamily" Value="Arial" />
       <Setter Property="FontSize" Value="12" />
       <Setter Property="FontWeight" Value="Normal" />
       <Setter Property="Foreground" Value="Red" />
-      <Style.Triggers>
-        <DataTrigger Binding="{Binding Path=State}" Value="False">
-          <Setter Property="Foreground" Value="Yellow" />
-        </DataTrigger>
-        <DataTrigger Binding="{Binding Path=State}" Value="True">
-          <Setter Property="Foreground" Value="DeepPink" />
-        </DataTrigger>
-      </Style.Triggers>
     </Style>
 
-    <Style x:Key="DigitalLogicCheckBoxStyleKey" TargetType="CheckBox">
+    <Style Selector="TextBlock.IsFalse">
+      <Setter Property="Foreground" Value="Yellow" />
+    </Style>
+
+    <Style Selector="TextBlock.IsTrue">
+      <Setter Property="Foreground" Value="DeepPink" />
+    </Style>
+
+    <Style Selector="CheckBox.DigitalLogicCheckBoxStyleKey">
       <Setter Property="Template">
         <Setter.Value>
           <ControlTemplate>
@@ -175,193 +182,231 @@
       </Setter>
     </Style>
 
-    <DataTemplate x:Key="DigitalSignalDataTemplateKey">
+    <!-- Model -->
+
+    <Style Selector="CheckBox.StateCheckBoxStyleKey">
+      <Setter Property="Foreground" Value="Red" />
+      <!-- TODO: -->
+      <!--<Style.Triggers>
+        <DataTrigger Binding="{Binding Path=State}" Value="False">
+          <Setter Property="Foreground" Value="Black" />
+        </DataTrigger>
+        <DataTrigger Binding="{Binding Path=State}" Value="True">
+          <Setter Property="Foreground" Value="DeepPink" />
+        </DataTrigger>
+      </Style.Triggers>-->
+    </Style>
+
+    <Style Selector="CheckBox.DigitalWireStateCheckBoxStyleKey">
+      <Setter Property="Foreground" Value="Red" />
+      <!-- TODO: -->
+      <!--<Style.Triggers>
+        <DataTrigger Binding="{Binding Path=Signal.State}" Value="False">
+          <Setter Property="Foreground" Value="Black" />
+        </DataTrigger>
+        <DataTrigger Binding="{Binding Path=Signal.State}" Value="True">
+          <Setter Property="Foreground" Value="DeepPink" />
+        </DataTrigger>
+      </Style.Triggers>-->
+    </Style>
+
+  </Application.Styles>
+
+  <Application.Resources>
+
+    <!-- Diagram -->
+
+    <DataTemplate x:Key="DigitalSignalDataTemplateKey" x:DataType="core:DigitalSignal">
       <CheckBox IsChecked="{Binding Path=State}" Width="120" Height="30">
         <CheckBox.Template>
           <ControlTemplate>
-            <Grid Width="120" Height="30" Style="{StaticResource ResourceKey=StateDigitalSignalGridStyleKey}">
-              <Rectangle Style="{StaticResource ResourceKey=DigitalSignalRectangleStyleKey}" Width="120" Height="30" />
-              <TextBlock Text="{Binding Path=Name}" Style="{StaticResource ResourceKey=DigitalSignalTextBlockStyleKey}"
-                         VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" />
+            <Grid Width="120" Height="30" Classes="StateDigitalSignalGridStyleKey">
+              <Rectangle Classes="DigitalSignalRectangleStyleKey" Width="120" Height="30"
+                         Classes.IsTrue="{Binding State, FallbackValue={x:Null}, Converter={x:Static converters:Converters.BoolIsTrue}}"
+                         Classes.IsFalse="{Binding State, FallbackValue={x:Null}, Converter={x:Static converters:Converters.BoolIsFalse}}" />
+              <TextBlock Text="{Binding Path=Name}" Classes="DigitalSignalTextBlockStyleKey"
+                         VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0"
+                         Classes.IsTrue="{Binding State, FallbackValue={x:Null}, Converter={x:Static converters:Converters.BoolIsTrue}}"
+                         Classes.IsFalse="{Binding State, FallbackValue={x:Null}, Converter={x:Static converters:Converters.BoolIsFalse}}"/>
             </Grid>
           </ControlTemplate>
         </CheckBox.Template>
       </CheckBox>
     </DataTemplate>
 
-    <DataTemplate x:Key="DigitalWireDataTemplateKey">
-      <Line Style="{StaticResource ResourceKey=StateDigitalSignalLineStyleKey}"
-            X1="{Binding Path=StartPin.X}"
-            Y1="{Binding Path=StartPin.Y}"
-            X2="{Binding Path=EndPin.X}"
-            Y2="{Binding Path=EndPin.Y}" />
+    <DataTemplate x:Key="DigitalWireDataTemplateKey" x:DataType="core:DigitalWire">
+      <Line Classes="StateDigitalSignalLineStyleKey"
+            StartPoint="{Binding StartPin, Converter={x:Static converters:Converters.DigitalPinToPoint}}"
+            EndPoint="{Binding EndPin, Converter={x:Static converters:Converters.DigitalPinToPoint}}"
+            Classes.IsTrue="{Binding Signal.State, FallbackValue={x:Null}, Converter={x:Static converters:Converters.BoolIsTrue}}"
+            Classes.IsFalse="{Binding Signal.State, FallbackValue={x:Null}, Converter={x:Static converters:Converters.BoolIsFalse}}" />
     </DataTemplate>
 
-    <DataTemplate x:Key="AndGateDataTemplateKey">
+    <DataTemplate x:Key="AndGateDataTemplateKey" x:DataType="gates:AndGate">
       <Thumb>
         <Thumb.Template>
           <ControlTemplate>
-            <Grid Width="30" Height="30" Style="{StaticResource ResourceKey=StateDigitalLogicGridStyleKey}">
-              <Rectangle Style="{StaticResource ResourceKey=DigitalLogicRectangleStyleKey}" Width="30" Height="30" />
-              <TextBlock Text="&amp;" Style="{StaticResource ResourceKey=DigitalLogicTextBlockStyleKey}"
+            <Grid Width="30" Height="30" Classes="StateDigitalLogicGridStyleKey">
+              <Rectangle Classes="DigitalLogicRectangleStyleKey" Width="30" Height="30" />
+              <TextBlock Text="&amp;" Classes="DigitalLogicTextBlockStyleKey"
                          VerticalAlignment="Center" HorizontalAlignment="Center" />
-              <!--<CheckBox IsChecked="{Binding Path=Outputs[0].State}" Style="{StaticResource ResourceKey=DigitalLogicCheckBoxStyleKey}" Width="30" Height="30"/>-->
+              <!--<CheckBox IsChecked="{Binding Path=Outputs[0].State}" Classes="DigitalLogicCheckBoxStyleKey" Width="30" Height="30"/>-->
             </Grid>
           </ControlTemplate>
         </Thumb.Template>
       </Thumb>
     </DataTemplate>
 
-    <DataTemplate x:Key="OrGateDataTemplateKey">
+    <DataTemplate x:Key="OrGateDataTemplateKey" x:DataType="gates:OrGate">
       <Thumb>
         <Thumb.Template>
           <ControlTemplate>
-            <Grid Width="30" Height="30" Style="{StaticResource ResourceKey=StateDigitalLogicGridStyleKey}">
-              <Rectangle Style="{StaticResource ResourceKey=DigitalLogicRectangleStyleKey}" Width="30" Height="30" />
-              <TextBlock Text="≥1" Style="{StaticResource ResourceKey=DigitalLogicTextBlockStyleKey}"
+            <Grid Width="30" Height="30" Classes="StateDigitalLogicGridStyleKey">
+              <Rectangle Classes="DigitalLogicRectangleStyleKey" Width="30" Height="30" />
+              <TextBlock Text="≥1" Classes="DigitalLogicTextBlockStyleKey"
                          VerticalAlignment="Center" HorizontalAlignment="Center" />
-              <!--<CheckBox IsChecked="{Binding Path=Outputs[0].State}" Style="{StaticResource ResourceKey=DigitalLogicCheckBoxStyleKey}" Width="30" Height="30"/>-->
+              <!--<CheckBox IsChecked="{Binding Path=Outputs[0].State}" Classes="DigitalLogicCheckBoxStyleKey" Width="30" Height="30"/>-->
             </Grid>
           </ControlTemplate>
         </Thumb.Template>
       </Thumb>
     </DataTemplate>
 
-    <DataTemplate x:Key="NotGateDataTemplateKey">
+    <DataTemplate x:Key="NotGateDataTemplateKey" x:DataType="gates:NotGate">
       <Thumb>
         <Thumb.Template>
           <ControlTemplate>
-            <Grid Width="30" Height="30" Style="{StaticResource ResourceKey=StateDigitalLogicGridStyleKey}">
-              <Rectangle Style="{StaticResource ResourceKey=DigitalLogicRectangleStyleKey}" Width="30" Height="30" />
-              <Ellipse Style="{StaticResource ResourceKey=DigitalLogicEllipseStyleKey}" HorizontalAlignment="Center"
+            <Grid Width="30" Height="30" Classes="StateDigitalLogicGridStyleKey">
+              <Rectangle Classes="DigitalLogicRectangleStyleKey" Width="30" Height="30" />
+              <Ellipse Classes="DigitalLogicEllipseStyleKey" HorizontalAlignment="Center"
                        Width="10" Height="10" Margin="0,0,-38,0" />
-              <TextBlock Text="1" Style="{StaticResource ResourceKey=DigitalLogicTextBlockStyleKey}"
+              <TextBlock Text="1" Classes="DigitalLogicTextBlockStyleKey"
                          VerticalAlignment="Center" HorizontalAlignment="Center" />
-              <!--<CheckBox IsChecked="{Binding Path=Outputs[0].State}" Style="{StaticResource ResourceKey=DigitalLogicCheckBoxStyleKey}" Width="30" Height="30"/>-->
+              <!--<CheckBox IsChecked="{Binding Path=Outputs[0].State}" Classes="DigitalLogicCheckBoxStyleKey" Width="30" Height="30"/>-->
             </Grid>
           </ControlTemplate>
         </Thumb.Template>
       </Thumb>
     </DataTemplate>
 
-    <DataTemplate x:Key="BufferGateDataTemplateKey">
+    <DataTemplate x:Key="BufferGateDataTemplateKey" x:DataType="gates:BufferGate">
       <Thumb>
         <Thumb.Template>
           <ControlTemplate>
-            <Grid Width="30" Height="30" Style="{StaticResource ResourceKey=StateDigitalLogicGridStyleKey}">
-              <Rectangle Style="{StaticResource ResourceKey=DigitalLogicRectangleStyleKey}" Width="30" Height="30" />
-              <TextBlock Text="1" Style="{StaticResource ResourceKey=DigitalLogicTextBlockStyleKey}"
+            <Grid Width="30" Height="30" Classes="StateDigitalLogicGridStyleKey">
+              <Rectangle Classes="DigitalLogicRectangleStyleKey" Width="30" Height="30" />
+              <TextBlock Text="1" Classes="DigitalLogicTextBlockStyleKey"
                          VerticalAlignment="Center" HorizontalAlignment="Center" />
-              <!--<CheckBox IsChecked="{Binding Path=Outputs[0].State}" Style="{StaticResource ResourceKey=DigitalLogicCheckBoxStyleKey}" Width="30" Height="30"/>-->
+              <!--<CheckBox IsChecked="{Binding Path=Outputs[0].State}" Classes="DigitalLogicCheckBoxStyleKey" Width="30" Height="30"/>-->
             </Grid>
           </ControlTemplate>
         </Thumb.Template>
       </Thumb>
     </DataTemplate>
 
-    <DataTemplate x:Key="NandGateDataTemplateKey">
+    <DataTemplate x:Key="NandGateDataTemplateKey" x:DataType="gates:NandGate">
       <Thumb>
         <Thumb.Template>
           <ControlTemplate>
-            <Grid Width="30" Height="30" Style="{StaticResource ResourceKey=StateDigitalLogicGridStyleKey}">
-              <Rectangle Style="{StaticResource ResourceKey=DigitalLogicRectangleStyleKey}" Width="30" Height="30" />
-              <Ellipse Style="{StaticResource ResourceKey=DigitalLogicEllipseStyleKey}" HorizontalAlignment="Center"
+            <Grid Width="30" Height="30" Classes="StateDigitalLogicGridStyleKey">
+              <Rectangle Classes="DigitalLogicRectangleStyleKey" Width="30" Height="30" />
+              <Ellipse Classes="DigitalLogicEllipseStyleKey" HorizontalAlignment="Center"
                        Width="10" Height="10" Margin="0,0,-38,0" />
-              <TextBlock Text="&amp;" Style="{StaticResource ResourceKey=DigitalLogicTextBlockStyleKey}"
+              <TextBlock Text="&amp;" Classes="DigitalLogicTextBlockStyleKey"
                          VerticalAlignment="Center" HorizontalAlignment="Center" />
-              <!--<CheckBox IsChecked="{Binding Path=Outputs[0].State}" Style="{StaticResource ResourceKey=DigitalLogicCheckBoxStyleKey}" Width="30" Height="30"/>-->
+              <!--<CheckBox IsChecked="{Binding Path=Outputs[0].State}" Classes="DigitalLogicCheckBoxStyleKey" Width="30" Height="30"/>-->
             </Grid>
           </ControlTemplate>
         </Thumb.Template>
       </Thumb>
     </DataTemplate>
 
-    <DataTemplate x:Key="NorGateDataTemplateKey">
+    <DataTemplate x:Key="NorGateDataTemplateKey" x:DataType="gates:NorGate">
       <Thumb>
         <Thumb.Template>
           <ControlTemplate>
-            <Grid Width="30" Height="30" Style="{StaticResource ResourceKey=StateDigitalLogicGridStyleKey}">
-              <Rectangle Style="{StaticResource ResourceKey=DigitalLogicRectangleStyleKey}" Width="30" Height="30" />
-              <Ellipse Style="{StaticResource ResourceKey=DigitalLogicEllipseStyleKey}" HorizontalAlignment="Center"
+            <Grid Width="30" Height="30" Classes="StateDigitalLogicGridStyleKey">
+              <Rectangle Classes="DigitalLogicRectangleStyleKey" Width="30" Height="30" />
+              <Ellipse Classes="DigitalLogicEllipseStyleKey" HorizontalAlignment="Center"
                        Width="10" Height="10" Margin="0,0,-38,0" />
-              <TextBlock Text="≥1" Style="{StaticResource ResourceKey=DigitalLogicTextBlockStyleKey}"
+              <TextBlock Text="≥1" Classes="DigitalLogicTextBlockStyleKey"
                          VerticalAlignment="Center" HorizontalAlignment="Center" />
-              <!--<CheckBox IsChecked="{Binding Path=Outputs[0].State}" Style="{StaticResource ResourceKey=DigitalLogicCheckBoxStyleKey}" Width="30" Height="30"/>-->
+              <!--<CheckBox IsChecked="{Binding Path=Outputs[0].State}" Classes="DigitalLogicCheckBoxStyleKey" Width="30" Height="30"/>-->
             </Grid>
           </ControlTemplate>
         </Thumb.Template>
       </Thumb>
     </DataTemplate>
 
-    <DataTemplate x:Key="XorGateDataTemplateKey">
+    <DataTemplate x:Key="XorGateDataTemplateKey" x:DataType="gates:XorGate">
       <Thumb>
         <Thumb.Template>
           <ControlTemplate>
-            <Grid Width="30" Height="30" Style="{StaticResource ResourceKey=StateDigitalLogicGridStyleKey}">
-              <Rectangle Style="{StaticResource ResourceKey=DigitalLogicRectangleStyleKey}" Width="30" Height="30" />
-              <TextBlock Text="=1" Style="{StaticResource ResourceKey=DigitalLogicTextBlockStyleKey}"
+            <Grid Width="30" Height="30" Classes="StateDigitalLogicGridStyleKey">
+              <Rectangle Classes="DigitalLogicRectangleStyleKey" Width="30" Height="30" />
+              <TextBlock Text="=1" Classes="DigitalLogicTextBlockStyleKey"
                          VerticalAlignment="Center" HorizontalAlignment="Center" />
-              <!--<CheckBox IsChecked="{Binding Path=Outputs[0].State}" Style="{StaticResource ResourceKey=DigitalLogicCheckBoxStyleKey}" Width="30" Height="30"/>-->
+              <!--<CheckBox IsChecked="{Binding Path=Outputs[0].State}" Classes="DigitalLogicCheckBoxStyleKey" Width="30" Height="30"/>-->
             </Grid>
           </ControlTemplate>
         </Thumb.Template>
       </Thumb>
     </DataTemplate>
 
-    <DataTemplate x:Key="XnorGateDataTemplateKey">
+    <DataTemplate x:Key="XnorGateDataTemplateKey" x:DataType="gates:XnorGate">
       <Thumb>
         <Thumb.Template>
           <ControlTemplate>
-            <Grid Width="30" Height="30" Style="{StaticResource ResourceKey=StateDigitalLogicGridStyleKey}">
-              <Rectangle Style="{StaticResource ResourceKey=DigitalLogicRectangleStyleKey}" Width="30" Height="30" />
-              <Ellipse Style="{StaticResource ResourceKey=DigitalLogicEllipseStyleKey}" HorizontalAlignment="Center"
+            <Grid Width="30" Height="30" Classes="StateDigitalLogicGridStyleKey">
+              <Rectangle Classes="DigitalLogicRectangleStyleKey" Width="30" Height="30" />
+              <Ellipse Classes="DigitalLogicEllipseStyleKey" HorizontalAlignment="Center"
                        Width="10" Height="10" Margin="0,0,-38,0" />
-              <TextBlock Text="=1" Style="{StaticResource ResourceKey=DigitalLogicTextBlockStyleKey}"
+              <TextBlock Text="=1" Classes="DigitalLogicTextBlockStyleKey"
                          VerticalAlignment="Center" HorizontalAlignment="Center" />
-              <!--<CheckBox IsChecked="{Binding Path=Outputs[0].State}" Style="{StaticResource ResourceKey=DigitalLogicCheckBoxStyleKey}" Width="30" Height="30"/>-->
+              <!--<CheckBox IsChecked="{Binding Path=Outputs[0].State}" Classes="DigitalLogicCheckBoxStyleKey" Width="30" Height="30"/>-->
             </Grid>
           </ControlTemplate>
         </Thumb.Template>
       </Thumb>
     </DataTemplate>
 
-    <DataTemplate x:Key="TimerOnDelayDataTemplateKey">
+    <DataTemplate x:Key="TimerOnDelayDataTemplateKey" x:DataType="timers:TimerOnDelay">
       <Thumb>
         <Thumb.Template>
           <ControlTemplate>
-            <Grid Width="30" Height="30" Style="{StaticResource ResourceKey=StateDigitalLogicGridStyleKey}">
-              <Rectangle Style="{StaticResource ResourceKey=DigitalLogicRectangleStyleKey}" Width="30" Height="30" />
-              <Line X1="7" Y1="18" X2="7" Y2="22" Style="{StaticResource ResourceKey=DigitalLogicLineStyleKey}" />
-              <Line X1="23" Y1="18" X2="23" Y2="22" Style="{StaticResource ResourceKey=DigitalLogicLineStyleKey}" />
-              <Line X1="7" Y1="20" X2="23" Y2="20" Style="{StaticResource ResourceKey=DigitalLogicLineStyleKey}" />
+            <Grid Width="30" Height="30" Classes="StateDigitalLogicGridStyleKey">
+              <Rectangle Classes="DigitalLogicRectangleStyleKey" Width="30" Height="30" />
+              <Line StartPoint="7,18" EndPoint="7,22" Classes="DigitalLogicLineStyleKey" />
+              <Line StartPoint="23,18" EndPoint="23,22" Classes="DigitalLogicLineStyleKey" />
+              <Line StartPoint="7,20" EndPoint="23,20" Classes="DigitalLogicLineStyleKey" />
               <TextBlock Text="{Binding Path=Delay, StringFormat=T\={0}s}" Margin="0,-14,0,0"
                          HorizontalAlignment="Center"
-                         Style="{StaticResource ResourceKey=DigitalLogicSmallTextBlockStyleKey}" />
+                         Classes="DigitalLogicSmallTextBlockStyleKey" />
               <TextBlock Text="T" Margin="4,4,0,0" HorizontalAlignment="Left"
-                         Style="{StaticResource ResourceKey=DigitalLogicSmallTextBlockStyleKey}" />
+                         Classes="DigitalLogicSmallTextBlockStyleKey" />
               <TextBlock Text="0" Margin="0,4,4,0" HorizontalAlignment="Right"
-                         Style="{StaticResource ResourceKey=DigitalLogicSmallTextBlockStyleKey}" />
-              <!--<CheckBox IsChecked="{Binding Path=Outputs[0].State}" Style="{StaticResource ResourceKey=DigitalLogicCheckBoxStyleKey}" Width="30" Height="30"/>-->
+                         Classes="DigitalLogicSmallTextBlockStyleKey" />
+              <!--<CheckBox IsChecked="{Binding Path=Outputs[0].State}" Classes="DigitalLogicCheckBoxStyleKey" Width="30" Height="30"/>-->
             </Grid>
           </ControlTemplate>
         </Thumb.Template>
       </Thumb>
     </DataTemplate>
 
-    <DataTemplate x:Key="TimerPulseDataTemplateKey">
+    <DataTemplate x:Key="TimerPulseDataTemplateKey" x:DataType="timers:TimerPulse">
       <Thumb>
         <Thumb.Template>
           <ControlTemplate>
-            <Grid Width="30" Height="30" Style="{StaticResource ResourceKey=StateDigitalLogicGridStyleKey}">
-              <Rectangle Style="{StaticResource ResourceKey=DigitalLogicRectangleStyleKey}" Width="30" Height="30" />
-              <Line X1="7" Y1="19" X2="11" Y2="19" Style="{StaticResource ResourceKey=DigitalLogicLineStyleKey}" />
-              <Line X1="19" Y1="19" X2="23" Y2="19" Style="{StaticResource ResourceKey=DigitalLogicLineStyleKey}" />
-              <Line X1="11" Y1="11" X2="19" Y2="11" Style="{StaticResource ResourceKey=DigitalLogicLineStyleKey}" />
-              <Line X1="11" Y1="11" X2="11" Y2="19" Style="{StaticResource ResourceKey=DigitalLogicLineStyleKey}" />
-              <Line X1="19" Y1="11" X2="19" Y2="19" Style="{StaticResource ResourceKey=DigitalLogicLineStyleKey}" />
+            <Grid Width="30" Height="30" Classes="StateDigitalLogicGridStyleKey">
+              <Rectangle Classes="DigitalLogicRectangleStyleKey" Width="30" Height="30" />
+              <Line StartPoint="7,19" EndPoint="11,19" Classes="DigitalLogicLineStyleKey" />
+              <Line StartPoint="19,19" EndPoint="23,19" Classes="DigitalLogicLineStyleKey" />
+              <Line StartPoint="11,11" EndPoint="19,11" Classes="DigitalLogicLineStyleKey" />
+              <Line StartPoint="11,11" EndPoint="11,19" Classes="DigitalLogicLineStyleKey" />
+              <Line StartPoint="19,11" EndPoint="19,19" Classes="DigitalLogicLineStyleKey" />
               <TextBlock Text="{Binding Path=Delay, StringFormat={}{0}s}" Margin="0,-14,0,0" HorizontalAlignment="Center"
-                         Style="{StaticResource ResourceKey=DigitalLogicSmallTextBlockStyleKey}" />
-              <!--<CheckBox IsChecked="{Binding Path=Outputs[0].State}" Style="{StaticResource ResourceKey=DigitalLogicCheckBoxStyleKey}" Width="30" Height="30"/>-->
+                         Classes="DigitalLogicSmallTextBlockStyleKey" />
+              <!--<CheckBox IsChecked="{Binding Path=Outputs[0].State}" Classes="DigitalLogicCheckBoxStyleKey" Width="30" Height="30"/>-->
             </Grid>
           </ControlTemplate>
         </Thumb.Template>
@@ -370,31 +415,7 @@
 
     <!-- Model -->
 
-    <Style x:Key="StateCheckBoxStyleKey" TargetType="CheckBox">
-      <Setter Property="Foreground" Value="Red" />
-      <Style.Triggers>
-        <DataTrigger Binding="{Binding Path=State}" Value="False">
-          <Setter Property="Foreground" Value="Black" />
-        </DataTrigger>
-        <DataTrigger Binding="{Binding Path=State}" Value="True">
-          <Setter Property="Foreground" Value="DeepPink" />
-        </DataTrigger>
-      </Style.Triggers>
-    </Style>
-
-    <Style x:Key="DigitalWireStateCheckBoxStyleKey" TargetType="CheckBox">
-      <Setter Property="Foreground" Value="Red" />
-      <Style.Triggers>
-        <DataTrigger Binding="{Binding Path=Signal.State}" Value="False">
-          <Setter Property="Foreground" Value="Black" />
-        </DataTrigger>
-        <DataTrigger Binding="{Binding Path=Signal.State}" Value="True">
-          <Setter Property="Foreground" Value="DeepPink" />
-        </DataTrigger>
-      </Style.Triggers>
-    </Style>
-
-    <DataTemplate x:Key="DigitalSignalValueDataTemplateKey">
+    <DataTemplate x:Key="DigitalSignalValueDataTemplateKey" x:DataType="core:DigitalSignal">
       <Grid Margin="2">
         <Grid.RowDefinitions>
           <RowDefinition Height="Auto" />
@@ -409,13 +430,13 @@
             </Grid.RowDefinitions>
             <TextBlock Text="{Binding Path=Name}" Margin="2" Grid.Row="0" Background="LightGray" />
             <CheckBox IsChecked="{Binding Path=State}" Content="State" Grid.Row="2" Margin="2"
-                      Style="{StaticResource ResourceKey=StateCheckBoxStyleKey}" />
+                      Classes="StateCheckBoxStyleKey" />
           </Grid>
         </Border>
       </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="DigitalLogicValueDataTemplateKey">
+    <DataTemplate x:Key="DigitalLogicValueDataTemplateKey" x:DataType="core:DigitalLogic">
       <Grid Margin="2">
         <Grid.RowDefinitions>
           <RowDefinition Height="Auto" />
@@ -428,16 +449,14 @@
         </Grid.ColumnDefinitions>
         <TextBlock Text="{Binding Path=Name}" Margin="3" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"
                    Background="LightBlue" />
-        <ListBox ItemsSource="{Binding Path=Inputs}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
-                 HorizontalContentAlignment="Stretch"
+        <ListBox Items="{Binding Path=Inputs}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
                  ItemTemplate="{StaticResource ResourceKey=DigitalSignalValueDataTemplateKey}" BorderThickness="0" />
-        <ListBox ItemsSource="{Binding Path=Outputs}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch"
-                 HorizontalContentAlignment="Stretch"
+        <ListBox Items="{Binding Path=Outputs}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch"
                  ItemTemplate="{StaticResource ResourceKey=DigitalSignalValueDataTemplateKey}" BorderThickness="0" />
       </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="AndGateValueDataTemplateKey">
+    <DataTemplate x:Key="AndGateValueDataTemplateKey" x:DataType="gates:AndGate">
       <Grid Margin="2">
         <Grid.RowDefinitions>
           <RowDefinition Height="Auto" />
@@ -450,16 +469,14 @@
         </Grid.ColumnDefinitions>
         <TextBlock Text="{Binding Path=Name}" Margin="3" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"
                    Background="LightBlue" />
-        <ListBox ItemsSource="{Binding Path=Inputs}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
-                 HorizontalContentAlignment="Stretch"
+        <ListBox Items="{Binding Path=Inputs}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
                  ItemTemplate="{StaticResource ResourceKey=DigitalSignalValueDataTemplateKey}" BorderThickness="0" />
-        <ListBox ItemsSource="{Binding Path=Outputs}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch"
-                 HorizontalContentAlignment="Stretch"
+        <ListBox Items="{Binding Path=Outputs}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch"
                  ItemTemplate="{StaticResource ResourceKey=DigitalSignalValueDataTemplateKey}" BorderThickness="0" />
       </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="OrGateValueDataTemplateKey">
+    <DataTemplate x:Key="OrGateValueDataTemplateKey" x:DataType="gates:OrGate">
       <Grid Margin="2">
         <Grid.RowDefinitions>
           <RowDefinition Height="Auto" />
@@ -472,219 +489,128 @@
         </Grid.ColumnDefinitions>
         <TextBlock Text="{Binding Path=Name}" Margin="3" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"
                    Background="LightBlue" />
-        <ListBox ItemsSource="{Binding Path=Inputs}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
-                 HorizontalContentAlignment="Stretch"
+        <ListBox Items="{Binding Path=Inputs}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
                  ItemTemplate="{StaticResource ResourceKey=DigitalSignalValueDataTemplateKey}" BorderThickness="0" />
-        <ListBox ItemsSource="{Binding Path=Outputs}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch"
-                 HorizontalContentAlignment="Stretch"
+        <ListBox Items="{Binding Path=Outputs}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch"
                  ItemTemplate="{StaticResource ResourceKey=DigitalSignalValueDataTemplateKey}" BorderThickness="0" />
       </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="NotGateValueDataTemplateKey">
-      <Grid Margin="2">
-        <Grid.RowDefinitions>
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <DataTemplate x:Key="NotGateValueDataTemplateKey" x:DataType="gates:NotGate">
+      <Grid Margin="2" RowDefinitions="Auto,Auto,*">
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="50*" />
           <ColumnDefinition Width="50*" />
         </Grid.ColumnDefinitions>
         <TextBlock Text="{Binding Path=Name}" Margin="3" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"
                    Background="LightBlue" />
-        <ListBox ItemsSource="{Binding Path=Inputs}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
-                 HorizontalContentAlignment="Stretch"
+        <ListBox Items="{Binding Path=Inputs}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
                  ItemTemplate="{StaticResource ResourceKey=DigitalSignalValueDataTemplateKey}" BorderThickness="0" />
-        <ListBox ItemsSource="{Binding Path=Outputs}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch"
-                 HorizontalContentAlignment="Stretch"
+        <ListBox Items="{Binding Path=Outputs}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch"
                  ItemTemplate="{StaticResource ResourceKey=DigitalSignalValueDataTemplateKey}" BorderThickness="0" />
       </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="BufferGateValueDataTemplateKey">
-      <Grid Margin="2">
-        <Grid.RowDefinitions>
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <DataTemplate x:Key="BufferGateValueDataTemplateKey" x:DataType="gates:BufferGate">
+      <Grid Margin="2" RowDefinitions="Auto,Auto,*">
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="50*" />
           <ColumnDefinition Width="50*" />
         </Grid.ColumnDefinitions>
         <TextBlock Text="{Binding Path=Name}" Margin="3" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"
                    Background="LightBlue" />
-        <ListBox ItemsSource="{Binding Path=Inputs}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
-                 HorizontalContentAlignment="Stretch"
+        <ListBox Items="{Binding Path=Inputs}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
                  ItemTemplate="{StaticResource ResourceKey=DigitalSignalValueDataTemplateKey}" BorderThickness="0" />
-        <ListBox ItemsSource="{Binding Path=Outputs}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch"
-                 HorizontalContentAlignment="Stretch"
+        <ListBox Items="{Binding Path=Outputs}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch"
                  ItemTemplate="{StaticResource ResourceKey=DigitalSignalValueDataTemplateKey}" BorderThickness="0" />
       </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="NandGateValueDataTemplateKey">
-      <Grid Margin="2">
-        <Grid.RowDefinitions>
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="50*" />
-          <ColumnDefinition Width="50*" />
-        </Grid.ColumnDefinitions>
+    <DataTemplate x:Key="NandGateValueDataTemplateKey" x:DataType="gates:NandGate">
+      <Grid Margin="2" RowDefinitions="Auto,Auto,*" ColumnDefinitions="50*,50*">
         <TextBlock Text="{Binding Path=Name}" Margin="3" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"
                    Background="LightBlue" />
-        <ListBox ItemsSource="{Binding Path=Inputs}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
-                 HorizontalContentAlignment="Stretch"
+        <ListBox Items="{Binding Path=Inputs}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
                  ItemTemplate="{StaticResource ResourceKey=DigitalSignalValueDataTemplateKey}" BorderThickness="0" />
-        <ListBox ItemsSource="{Binding Path=Outputs}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch"
-                 HorizontalContentAlignment="Stretch"
+        <ListBox Items="{Binding Path=Outputs}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch"
                  ItemTemplate="{StaticResource ResourceKey=DigitalSignalValueDataTemplateKey}" BorderThickness="0" />
       </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="NorGateValueDataTemplateKey">
-      <Grid Margin="2">
-        <Grid.RowDefinitions>
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="50*" />
-          <ColumnDefinition Width="50*" />
-        </Grid.ColumnDefinitions>
+    <DataTemplate x:Key="NorGateValueDataTemplateKey" x:DataType="gates:NotGate">
+      <Grid Margin="2" RowDefinitions="Auto,Auto,*" ColumnDefinitions="50*,50*">
         <TextBlock Text="{Binding Path=Name}" Margin="3" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"
                    Background="LightBlue" />
-        <ListBox ItemsSource="{Binding Path=Inputs}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
-                 HorizontalContentAlignment="Stretch"
+        <ListBox Items="{Binding Path=Inputs}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
                  ItemTemplate="{StaticResource ResourceKey=DigitalSignalValueDataTemplateKey}" BorderThickness="0" />
-        <ListBox ItemsSource="{Binding Path=Outputs}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch"
-                 HorizontalContentAlignment="Stretch"
+        <ListBox Items="{Binding Path=Outputs}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch"
                  ItemTemplate="{StaticResource ResourceKey=DigitalSignalValueDataTemplateKey}" BorderThickness="0" />
       </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="XorGateValueDataTemplateKey">
-      <Grid Margin="2">
-        <Grid.RowDefinitions>
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="50*" />
-          <ColumnDefinition Width="50*" />
-        </Grid.ColumnDefinitions>
+    <DataTemplate x:Key="XorGateValueDataTemplateKey" x:DataType="gates:XorGate">
+      <Grid Margin="2" RowDefinitions="Auto,Auto,*" ColumnDefinitions="50*,50*">
         <TextBlock Text="{Binding Path=Name}" Margin="3" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"
                    Background="LightBlue" />
-        <ListBox ItemsSource="{Binding Path=Inputs}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
-                 HorizontalContentAlignment="Stretch"
+        <ListBox Items="{Binding Path=Inputs}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
                  ItemTemplate="{StaticResource ResourceKey=DigitalSignalValueDataTemplateKey}" BorderThickness="0" />
-        <ListBox ItemsSource="{Binding Path=Outputs}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch"
-                 HorizontalContentAlignment="Stretch"
+        <ListBox Items="{Binding Path=Outputs}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch"
                  ItemTemplate="{StaticResource ResourceKey=DigitalSignalValueDataTemplateKey}" BorderThickness="0" />
       </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="XnorGateValueDataTemplateKey">
-      <Grid Margin="2">
-        <Grid.RowDefinitions>
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="50*" />
-          <ColumnDefinition Width="50*" />
-        </Grid.ColumnDefinitions>
+    <DataTemplate x:Key="XnorGateValueDataTemplateKey" x:DataType="gates:XnorGate">
+      <Grid Margin="2" RowDefinitions="Auto,Auto,*" ColumnDefinitions="50*,50*">
         <TextBlock Text="{Binding Path=Name}" Margin="3" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"
                    Background="LightBlue" />
-        <ListBox ItemsSource="{Binding Path=Inputs}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
-                 HorizontalContentAlignment="Stretch"
+        <ListBox Items="{Binding Path=Inputs}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
                  ItemTemplate="{StaticResource ResourceKey=DigitalSignalValueDataTemplateKey}" BorderThickness="0" />
-        <ListBox ItemsSource="{Binding Path=Outputs}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch"
-                 HorizontalContentAlignment="Stretch"
+        <ListBox Items="{Binding Path=Outputs}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch"
                  ItemTemplate="{StaticResource ResourceKey=DigitalSignalValueDataTemplateKey}" BorderThickness="0" />
       </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="TimerOnDelayValueDataTemplateKey">
-      <Grid Margin="2">
-        <Grid.RowDefinitions>
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="50*" />
-          <ColumnDefinition Width="50*" />
-        </Grid.ColumnDefinitions>
+    <DataTemplate x:Key="TimerOnDelayValueDataTemplateKey" x:DataType="timers:TimerOnDelay">
+      <Grid Margin="2" RowDefinitions="Auto,Auto,*" ColumnDefinitions="50*,50*">
         <TextBlock Text="{Binding Path=Name}" Margin="3" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"
                    Background="LightBlue" />
         <TextBlock Text="{Binding Path=Delay}" Margin="3" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" />
         <Slider Value="{Binding Path=Delay}" Minimum="0" Maximum="60" TickFrequency="1" IsSnapToTickEnabled="True"
                 Margin="3" Grid.Column="1" Grid.Row="1" />
-        <ListBox ItemsSource="{Binding Path=Inputs}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
-                 HorizontalContentAlignment="Stretch"
+        <ListBox Items="{Binding Path=Inputs}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
                  ItemTemplate="{StaticResource ResourceKey=DigitalSignalValueDataTemplateKey}" BorderThickness="0" />
-        <ListBox ItemsSource="{Binding Path=Outputs}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch"
-                 HorizontalContentAlignment="Stretch"
+        <ListBox Items="{Binding Path=Outputs}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch"
                  ItemTemplate="{StaticResource ResourceKey=DigitalSignalValueDataTemplateKey}" BorderThickness="0" />
       </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="TimerPulseValueDataTemplateKey">
-      <Grid Margin="2">
-        <Grid.RowDefinitions>
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="50*" />
-          <ColumnDefinition Width="50*" />
-        </Grid.ColumnDefinitions>
+    <DataTemplate x:Key="TimerPulseValueDataTemplateKey" x:DataType="timers:TimerPulse">
+      <Grid Margin="2" RowDefinitions="Auto,Auto,*" ColumnDefinitions="50*,50*">
         <TextBlock Text="{Binding Path=Name}" Margin="3" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"
                    Background="LightBlue" />
         <TextBlock Text="{Binding Path=Delay}" Margin="3" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" />
         <Slider Value="{Binding Path=Delay}" Minimum="0" Maximum="60" TickFrequency="1" IsSnapToTickEnabled="True"
                 Margin="3" Grid.Column="1" Grid.Row="1" />
-        <ListBox ItemsSource="{Binding Path=Inputs}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
-                 HorizontalContentAlignment="Stretch"
+        <ListBox Items="{Binding Path=Inputs}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"
                  ItemTemplate="{StaticResource ResourceKey=DigitalSignalValueDataTemplateKey}" BorderThickness="0" />
-        <ListBox ItemsSource="{Binding Path=Outputs}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch"
-                 HorizontalContentAlignment="Stretch"
+        <ListBox Items="{Binding Path=Outputs}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch"
                  ItemTemplate="{StaticResource ResourceKey=DigitalSignalValueDataTemplateKey}" BorderThickness="0" />
       </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="DigitalWireValueDataTemplateKey">
-      <Grid Margin="2">
-        <Grid.RowDefinitions>
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <DataTemplate x:Key="DigitalWireValueDataTemplateKey" x:DataType="core:DigitalWire">
+      <Grid Margin="2" RowDefinitions="Auto,Auto,*">
         <TextBlock Text="{Binding Path=Name}" Margin="3" Grid.Row="0" Background="LightBlue" />
         <Border Grid.Row="1" Margin="3" BorderThickness="1" BorderBrush="Black">
-          <Grid Margin="1">
-            <Grid.RowDefinitions>
-              <RowDefinition Height="Auto" />
-              <RowDefinition Height="Auto" />
-              <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <TextBlock Text="{Binding Path=Signal.Name}" Margin="2" Grid.Row="0" Background="LightGray" />
-            <CheckBox IsChecked="{Binding Path=Signal.State}" Content="State" Grid.Row="2" Margin="2"
-                      Style="{StaticResource ResourceKey=DigitalWireStateCheckBoxStyleKey}" />
+          <Grid Margin="1" RowDefinitions="Auto,Auto,*">
+            <TextBlock Text="{Binding Path=Signal.Name, FallbackValue={x:Null}}" Margin="2" Grid.Row="0" Background="LightGray" />
+            <CheckBox IsChecked="{Binding Path=Signal.State, FallbackValue={x:Null}}" Content="State" Grid.Row="2" Margin="2"
+                      Classes="DigitalWireStateCheckBoxStyleKey" />
           </Grid>
         </Border>
       </Grid>
     </DataTemplate>
-    
+
   </Application.Resources>
+
 </Application>
