@@ -19,7 +19,7 @@
     <Style Selector="ListBoxItem">
       <Setter Property="HorizontalContentAlignment" Value="Stretch" />
     </Style>
-    
+
     <!-- Diagram -->
 
     <Style Selector="Grid.StateDigitalLogicGridStyleKey">
