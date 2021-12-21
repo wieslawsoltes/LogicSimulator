@@ -243,7 +243,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="AndGateDataTemplateKey" x:DataType="gates:AndGate">
-      <Thumb>
+      <Thumb ClipToBounds="False">
         <Thumb.Template>
           <ControlTemplate>
             <Grid Width="30" Height="30" Classes="StateDigitalLogicGridStyleKey">
@@ -258,7 +258,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="OrGateDataTemplateKey" x:DataType="gates:OrGate">
-      <Thumb>
+      <Thumb ClipToBounds="False">
         <Thumb.Template>
           <ControlTemplate>
             <Grid Width="30" Height="30" Classes="StateDigitalLogicGridStyleKey">
@@ -273,7 +273,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="NotGateDataTemplateKey" x:DataType="gates:NotGate">
-      <Thumb>
+      <Thumb ClipToBounds="False">
         <Thumb.Template>
           <ControlTemplate>
             <Grid Width="30" Height="30" Classes="StateDigitalLogicGridStyleKey">
@@ -290,7 +290,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="BufferGateDataTemplateKey" x:DataType="gates:BufferGate">
-      <Thumb>
+      <Thumb ClipToBounds="False">
         <Thumb.Template>
           <ControlTemplate>
             <Grid Width="30" Height="30" Classes="StateDigitalLogicGridStyleKey">
@@ -305,7 +305,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="NandGateDataTemplateKey" x:DataType="gates:NandGate">
-      <Thumb>
+      <Thumb ClipToBounds="False">
         <Thumb.Template>
           <ControlTemplate>
             <Grid Width="30" Height="30" Classes="StateDigitalLogicGridStyleKey">
@@ -322,7 +322,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="NorGateDataTemplateKey" x:DataType="gates:NorGate">
-      <Thumb>
+      <Thumb ClipToBounds="False">
         <Thumb.Template>
           <ControlTemplate>
             <Grid Width="30" Height="30" Classes="StateDigitalLogicGridStyleKey">
@@ -339,7 +339,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="XorGateDataTemplateKey" x:DataType="gates:XorGate">
-      <Thumb>
+      <Thumb ClipToBounds="False">
         <Thumb.Template>
           <ControlTemplate>
             <Grid Width="30" Height="30" Classes="StateDigitalLogicGridStyleKey">
@@ -354,7 +354,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="XnorGateDataTemplateKey" x:DataType="gates:XnorGate">
-      <Thumb>
+      <Thumb ClipToBounds="False">
         <Thumb.Template>
           <ControlTemplate>
             <Grid Width="30" Height="30" Classes="StateDigitalLogicGridStyleKey">
@@ -371,7 +371,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="TimerOnDelayDataTemplateKey" x:DataType="timers:TimerOnDelay">
-      <Thumb>
+      <Thumb ClipToBounds="False">
         <Thumb.Template>
           <ControlTemplate>
             <Grid Width="30" Height="30" Classes="StateDigitalLogicGridStyleKey">
@@ -394,7 +394,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="TimerPulseDataTemplateKey" x:DataType="timers:TimerPulse">
-      <Thumb>
+      <Thumb ClipToBounds="False">
         <Thumb.Template>
           <ControlTemplate>
             <Grid Width="30" Height="30" Classes="StateDigitalLogicGridStyleKey">
