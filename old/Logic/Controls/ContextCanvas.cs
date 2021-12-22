@@ -21,6 +21,7 @@ namespace Logic.Controls
     using System.Windows.Documents;
     using System.Windows.Input;
     using System.Windows.Media;
+    using System.Reactive.Threading;
 
     public class ContextCanvas : Canvas
     {
@@ -61,7 +62,7 @@ namespace Logic.Controls
             // process mouse move events with Rx
             var mouseMove = Observable.FromEventPattern<MouseEventHandler, MouseEventArgs>(eh => MouseMove += eh, eh => MouseMove -= eh);
 
-            mouseMove.ObserveOnDispatcher().Subscribe(x =>
+            mouseMove.ObserveOn(SynchronizationContext.Current).Subscribe(x =>
             {
                 var e = x.EventArgs;
                 var sender = x.Sender;

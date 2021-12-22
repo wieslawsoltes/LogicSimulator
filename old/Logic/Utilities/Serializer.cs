@@ -114,7 +114,15 @@ namespace Logic.Utilities
 
         public static T OpenXml<T>(string fileName)
         {
-            var s = new DataContractSerializer(typeof(T), GetTypes(), int.MaxValue, true, true, null);
+            var settings = new DataContractSerializerSettings()
+            {
+                MaxItemsInObjectGraph = int.MaxValue,
+                PreserveObjectReferences = true,
+                IgnoreExtensionDataObject = true,
+                SerializeReadOnlyTypes = false,
+                KnownTypes = GetTypes(),
+            };
+            var s = new DataContractSerializer(typeof(T), settings);
             using (var reader = XmlReader.Create(fileName))
             {
                 return (T)s.ReadObject(reader);
@@ -125,7 +133,15 @@ namespace Logic.Utilities
         {
             if (item != null)
             {
-                var s = new DataContractSerializer(item.GetType(), GetTypes(), int.MaxValue, true, true, null);
+                var settings = new DataContractSerializerSettings()
+                {
+                    MaxItemsInObjectGraph = int.MaxValue,
+                    PreserveObjectReferences = true,
+                    IgnoreExtensionDataObject = true,
+                    SerializeReadOnlyTypes = false,
+                    KnownTypes = GetTypes(),
+                };
+                var s = new DataContractSerializer(item.GetType(), settings);
                 using (var writer = XmlWriter.Create(fileName, new XmlWriterSettings() { Indent = true, IndentChars = "    " }))
                 {
                     s.WriteObject(writer, item);
