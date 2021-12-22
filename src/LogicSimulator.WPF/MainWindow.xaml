@@ -5,7 +5,10 @@
         Title="LogicSimulator.Avalonia.WPF"
         Height="700" Width="800"
         WindowStartupLocation="CenterScreen" WindowState="Normal"
-        UseLayoutRounding="True" TextOptions.TextFormattingMode="Display" SnapsToDevicePixels="True">
+        SnapsToDevicePixels="True" UseLayoutRounding="False"
+        TextOptions.TextFormattingMode="Display" 
+        TextOptions.TextHintingMode="Auto" 
+        TextOptions.TextRenderingMode="Auto">
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
