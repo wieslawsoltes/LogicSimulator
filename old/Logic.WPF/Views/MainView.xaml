@@ -559,11 +559,11 @@
                   BorderBrush="{x:Null}"
                   BorderThickness="0,0,0,0"
                   Grid.Column="5" Grid.Row="2">
-            <i:Interaction.Triggers>
+            <!--<i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectedItemChanged">
                     <i:InvokeCommandAction Command="{Binding SelectedItemChangedCommand}" CommandParameter="{Binding ElementName=tree, Path=SelectedItem}"/>
                 </i:EventTrigger>
-            </i:Interaction.Triggers>
+            </i:Interaction.Triggers>-->
             <TreeView.InputBindings>
                 <KeyBinding Command="{Binding ProjectAddCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+N"/>
                 <KeyBinding Command="{Binding ProjectCutCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+X"/>
