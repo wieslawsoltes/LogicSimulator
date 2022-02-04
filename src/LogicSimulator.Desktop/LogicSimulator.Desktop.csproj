@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>LogicSimulator.Desktop</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.12" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LogicSimulator.Base\LogicSimulator.Base.csproj" />
+  </ItemGroup>
+</Project>
