@@ -8,24 +8,29 @@ namespace LogicSimulator.Selectors;
 
 public class LogicDataTemplateSelector : IDataTemplate
 {
-    public IControl Build(object data)
+    public IControl Build(object? data)
     {
-        var type = data.GetType();
-        var key = type.Name + "DataTemplateKey";
-
-        if (Application.Current is { })
+        var type = data?.GetType();
+        if (type is { })
         {
-            Application.Current.TryFindResource(key, out var resource);
-            if (resource is DataTemplate dataTemplate)
+            var key = type.Name + "DataTemplateKey";
+
+            if (Application.Current is { })
             {
-                return dataTemplate.Build(data);
+                Application.Current.TryFindResource(key, out var resource);
+                if (resource is DataTemplate dataTemplate)
+                {
+                    return dataTemplate.Build(data);
+                }
             }
+
+            return new TextBlock { Text = "Not Found: " + type.Name };
         }
 
-        return new TextBlock { Text = "Not Found: " + type.Name };
+        return new TextBlock { Text = "Not found view as data is null." };
     }
 
-    public bool Match(object data)
+    public bool Match(object? data)
     {
         return data is LogicObject;
     }
